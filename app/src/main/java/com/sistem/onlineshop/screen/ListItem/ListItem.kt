@@ -58,7 +58,9 @@ fun ListItem(
                    modifier = Modifier.fillMaxWidth(),
                ) {
                    if (navController != null) {
-                       RecommendedItem( navController, items, index)
+                       RecommendedItem( navController, items, index, modifier.background(color =colorResource(R.color.gray) ,
+                           shape = RoundedCornerShape(20.dp)
+                       ))
                    }
                }
         }
@@ -68,11 +70,15 @@ fun ListItem(
 
 
 @Composable
-fun RecommendedItem(navController: NavController, item: List<ItemsModel>, pos: Int) {
+fun RecommendedItem(navController: NavController,
+                    item: List<ItemsModel>, pos: Int,
+                    modifier: Modifier = Modifier)
+{
 
-    Column (
-        modifier = Modifier.background(colorResource(R.color.gray))
-    ){
+    Column(
+        modifier = modifier.background(color =colorResource(R.color.gray) ,
+            shape = RoundedCornerShape(20.dp)
+        )) {
 
         AsyncImage(
                 model = item[pos].picURL.firstOrNull(),
@@ -101,13 +107,12 @@ fun RecommendedItem(navController: NavController, item: List<ItemsModel>, pos: I
         )
 
         Row(
-            modifier = Modifier.padding(top = 10.dp).fillMaxSize(),
+            modifier = Modifier.padding(vertical = 10.dp).fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceBetween
         ){
             Row (
                 modifier = Modifier.fillMaxWidth(),
             ){
-
 
                 Image(
                     painter = painterResource(id = R.drawable.ic_star),
@@ -130,7 +135,7 @@ fun RecommendedItem(navController: NavController, item: List<ItemsModel>, pos: I
                 Spacer(modifier = Modifier.weight(1f))
 
                 Text(
-                    modifier = Modifier.padding(end = 2.dp),
+                    modifier = Modifier.padding(end = 10.dp),
                     text = "$${item[pos].price}",
                     color = colorResource(R.color.purple_700),
                     fontSize = 18.sp,
